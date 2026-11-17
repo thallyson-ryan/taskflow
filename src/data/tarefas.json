@@ -1,0 +1,6 @@
+[
+  { "id": 1, "titulo": "Estudar React Router", "descricao": "Revisar rotas e useParams", "prioridade": "alta", "prazo": "2026-11-25", "concluida": false },
+  { "id": 2, "titulo": "Entregar proposta", "descricao": "Enviar formulário no Teams", "prioridade": "alta", "prazo": "2026-11-20", "concluida": true },
+  { "id": 3, "titulo": "Ler sobre useState", "descricao": "Documentação oficial do React", "prioridade": "media", "prazo": "2026-11-28", "concluida": false },
+  { "id": 4, "titulo": "Organizar repositório", "descricao": "Criar pastas e README", "prioridade": "baixa", "prazo": "2026-12-02", "concluida": false }
+]
