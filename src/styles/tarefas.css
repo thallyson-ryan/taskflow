@@ -1,21 +1,41 @@
+/* =============================================================================
+   tarefas.css — ESTILOS DA LISTA DE TAREFAS
+   Importado na ListaTarefas.jsx.
+   ============================================================================= */
+
+/* ---------- Filtros ---------- */
+/* flex-wrap: os campos quebram de linha em telas pequenas */
 .filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
 .filtros input, .filtros select { padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font-size: .95rem; }
-.filtros input { flex: 1; min-width: 200px; }
+.filtros input { flex: 1; min-width: 200px; } /* a busca ocupa o espaço que sobrar */
 .contador { color: #666; font-size: .9rem; }
+
+/* ---------- Lista e cartões ---------- */
 .lista { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
 .cartao { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+/* Tarefa concluída: título riscado e cinza */
 .cartao.concluida h3 { text-decoration: line-through; color: #888; }
 .cartao h3 { font-size: 1.05rem; margin-bottom: .25rem; }
 .info { color: #666; font-size: .85rem; margin: 0; }
 .cartao-lado { display: flex; align-items: center; gap: .75rem; }
 .cartao-lado a { color: #2d7be5; text-decoration: none; }
+
+/* ---------- Selos de prioridade (uma cor para cada) ---------- */
 .selo { padding: .2rem .6rem; border-radius: 12px; font-size: .8rem; color: #fff; }
-.selo.alta { background: #e5533d; }
-.selo.media { background: #f0a500; }
-.selo.baixa { background: #3aa76d; }
-.aviso { background: #fff8e1; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+.selo.alta { background: #e5533d; }  /* vermelho */
+.selo.media { background: #f0a500; } /* amarelo */
+.selo.baixa { background: #3aa76d; } /* verde */
+
+/* ---------- Avisos ---------- */
+.aviso { background: #fff8e1; padding: 1rem; border-radius: 8px; margin: 1rem 0; } /* caixa amarela */
+
+/* ---------- Estados da requisição (AV2) ---------- */
+/* Caixa do "Carregando tarefas..." */
 .carregando { display: flex; align-items: center; gap: .75rem; padding: 1.5rem; background: #fff; border-radius: 8px; }
+/* Spinner: círculo com a borda de cima azul girando sem parar */
 .spinner { width: 20px; height: 20px; border: 3px solid #ccc; border-top-color: #2d7be5; border-radius: 50%; animation: girar 1s linear infinite; }
 @keyframes girar { to { transform: rotate(360deg); } }
+/* Caixa vermelha de erro */
 .erro-lista { background: #fdecea; color: #b3261e; padding: 1rem; border-radius: 8px; }
+/* Barra azul que informa a origem dos dados (API, navegador ou contingência) */
 .barra-origem { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; background: #eef4fd; padding: .75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: .9rem; }
