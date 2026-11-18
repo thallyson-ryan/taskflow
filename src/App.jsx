@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import useLocalStorage from './hooks/useLocalStorage'
 import Navbar from './components/Navbar'
 import Inicio from './pages/Inicio'
 import ListaTarefas from './pages/ListaTarefas'
@@ -9,7 +9,7 @@ import NaoEncontrada from './pages/NaoEncontrada'
 import tarefasIniciais from './data/tarefas.json'
 
 export default function App() {
-  const [tarefas, setTarefas] = useState(tarefasIniciais)
+  const [tarefas, setTarefas] = useLocalStorage('taskflow:tarefas', tarefasIniciais)
 
   return (
     <>
