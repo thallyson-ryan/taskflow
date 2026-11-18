@@ -44,7 +44,7 @@ Estudantes e pequenas equipes perdem prazos e tarefas por anotarem em lugares di
 ## Como executar
 Pré-requisitos: Node.js LTS e Git.
 
-    git clone https://github.com/USUARIO/taskflow.git
+    git clone https://github.com/thallyson-ryan/taskflow.git
     cd taskflow
     npm install
 
@@ -61,7 +61,7 @@ Acesse o endereço exibido no terminal (normalmente http://localhost:5173).
 
 Credenciais de demonstração (DummyJSON): usuário emilys, senha emilyspass. Elas também aparecem na tela de login.
 
-## Contrato da API (Opção A – DummyJSON)
+## Contrato da API (DummyJSON)
 URL-base configurada em VITE_API_URL (padrão: https://dummyjson.com)
 
 | Operação | Método | Endpoint | Corpo | Resposta usada |
