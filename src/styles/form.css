@@ -1,0 +1,9 @@
+.form { display: flex; flex-direction: column; gap: 1rem; background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+.campo label { display: block; font-weight: 600; margin-bottom: .3rem; }
+.campo input, .campo select, .campo textarea { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
+.campo.invalido input, .campo.invalido select { border-color: #e5533d; }
+.erro { color: #e5533d; font-size: .85rem; margin: .25rem 0 0; }
+.sucesso { background: #e6f4ea; color: #1e6b3a; padding: .75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+.detalhe { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); margin-bottom: 1rem; }
+.botao.perigo { background: #e5533d; }
+.confirmacao { margin-top: 1rem; padding: 1rem; background: #fdecea; border-radius: 6px; }
