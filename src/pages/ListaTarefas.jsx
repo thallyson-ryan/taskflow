@@ -6,33 +6,72 @@ import '../styles/tarefas.css'
 
 const pesoPrioridade = { alta: 1, media: 2, baixa: 3 }
 
-export default function ListaTarefas({ tarefas }) {
+const avisosOrigem = {
+  api: 'Tarefas carregadas da API DummyJSON. Criações, edições e exclusões ficam salvas apenas neste navegador.',
+  cache: 'Exibindo as tarefas salvas neste navegador.',
+  contingencia: 'Modo de contingência: a API não respondeu e estes são dados locais de demonstração. Alterações não serão salvas.',
+}
+
+export default function ListaTarefas({ tarefas, status, erro, origem, onRecarregar, onContingencia }) {
   const [busca, setBusca] = useState('')
-  const [status, setStatus] = useState('todas')
+  const [filtroStatus, setFiltroStatus] = useState('todas')
   const [prioridade, setPrioridade] = useState('todas')
   const [ordem, setOrdem] = useState('prazo')
 
   const filtradas = tarefas
     .filter((t) => t.titulo.toLowerCase().includes(busca.toLowerCase()))
-    .filter((t) => status === 'todas' || (status === 'concluidas' ? t.concluida : !t.concluida))
+    .filter((t) => filtroStatus === 'todas' || (filtroStatus === 'concluidas' ? t.concluida : !t.concluida))
     .filter((t) => prioridade === 'todas' || t.prioridade === prioridade)
     .sort((a, b) => {
       if (ordem === 'prioridade') return pesoPrioridade[a.prioridade] - pesoPrioridade[b.prioridade]
       if (ordem === 'titulo') return a.titulo.localeCompare(b.titulo)
-      return a.prazo.localeCompare(b.prazo)
+      return (a.prazo || '9999-12-31').localeCompare(b.prazo || '9999-12-31')
     })
 
   function limparFiltros() {
     setBusca('')
-    setStatus('todas')
+    setFiltroStatus('todas')
     setPrioridade('todas')
   }
+
+  if (status === 'ocioso' || status === 'carregando') {
+    return (
+      <section>
+        <h1>Tarefas</h1>
+        <div className="carregando"><span className="spinner" /> Carregando tarefas...</div>
+      </section>
+    )
+  }
+
+  if (status === 'erro') {
+    return (
+      <section>
+        <h1>Tarefas</h1>
+        <div className="erro-lista">
+          <p>Não foi possível carregar as tarefas.</p>
+          <p>{erro}</p>
+          <div className="acoes">
+            <button className="botao" onClick={onRecarregar}>Tentar novamente</button>
+            <button className="botao secundario" onClick={onContingencia}>Usar dados de demonstração</button>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  const barraOrigem = (
+    <div className="barra-origem">
+      <span>{avisosOrigem[origem]}</span>
+      <button className="botao secundario" onClick={onRecarregar}>Recarregar da API</button>
+    </div>
+  )
 
   if (tarefas.length === 0) {
     return (
       <section>
         <h1>Tarefas</h1>
-        <p className="aviso">Nenhuma tarefa cadastrada ainda.</p>
+        {barraOrigem}
+        <p className="aviso">Nenhuma tarefa encontrada para este usuário.</p>
         <Link to="/tarefas/nova" className="botao">Cadastrar a primeira tarefa</Link>
       </section>
     )
@@ -41,9 +80,10 @@ export default function ListaTarefas({ tarefas }) {
   return (
     <section>
       <h1>Tarefas</h1>
+      {barraOrigem}
       <FiltroTarefas
         busca={busca} setBusca={setBusca}
-        status={status} setStatus={setStatus}
+        status={filtroStatus} setStatus={setFiltroStatus}
         prioridade={prioridade} setPrioridade={setPrioridade}
         ordem={ordem} setOrdem={setOrdem}
       />
