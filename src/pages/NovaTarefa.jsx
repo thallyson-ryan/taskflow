@@ -6,7 +6,7 @@ export default function NovaTarefa({ setTarefas }) {
   const navigate = useNavigate()
 
   function salvar(dados) {
-    const nova = { ...dados, id: Date.now(), concluida: false }
+    const nova = { ...dados, id: Date.now(), concluida: false, origem: 'local' }
     setTarefas((prev) => [...prev, nova])
     navigate(`/tarefas/${nova.id}`, { state: { mensagem: 'Tarefa cadastrada com sucesso!' } })
   }

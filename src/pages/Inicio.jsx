@@ -5,7 +5,9 @@ export default function Inicio({ total }) {
     <section className="inicio">
       <h1>Organize suas tarefas em um só lugar</h1>
       <p>O TaskFlow ajuda estudantes e pequenas equipes a controlar prazos, prioridades e status das tarefas.</p>
-      <p>Você tem {total} tarefa(s) cadastrada(s).</p>
+      {total !== null
+        ? <p>Você tem {total} tarefa(s) cadastrada(s).</p>
+        : <p>Entre com sua conta para ver suas tarefas.</p>}
       <div className="acoes">
         <Link to="/tarefas" className="botao">Ver tarefas</Link>
         <Link to="/tarefas/nova" className="botao secundario">Nova tarefa</Link>

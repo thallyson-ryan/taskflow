@@ -1,16 +1,12 @@
 import { useState } from 'react'
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom'
 import FormTarefa from '../components/FormTarefa'
+import formatarData from '../utils/formatarData'
 import '../styles/form.css'
 
 const rotulos = { alta: 'Alta', media: 'Média', baixa: 'Baixa' }
 
-function formatarData(data) {
-  const [ano, mes, dia] = data.split('-')
-  return `${dia}/${mes}/${ano}`
-}
-
-export default function DetalheTarefa({ tarefas, setTarefas }) {
+export default function DetalheTarefa({ tarefas, setTarefas, status }) {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
@@ -19,6 +15,10 @@ export default function DetalheTarefa({ tarefas, setTarefas }) {
   const [mensagem, setMensagem] = useState(location.state?.mensagem || '')
 
   const tarefa = tarefas.find((t) => t.id === Number(id))
+
+  if (status === 'ocioso' || status === 'carregando') {
+    return <p className="aviso">Carregando tarefa...</p>
+  }
 
   if (!tarefa) {
     return (
@@ -63,6 +63,7 @@ export default function DetalheTarefa({ tarefas, setTarefas }) {
         <p>Prioridade: {rotulos[tarefa.prioridade]}</p>
         <p>Prazo: {formatarData(tarefa.prazo)}</p>
         <p>Status: {tarefa.concluida ? 'Concluída' : 'Pendente'}</p>
+        <p>Origem: {tarefa.origem === 'api' ? 'API DummyJSON' : 'Criada neste navegador'}</p>
 
         <div className="acoes">
           <button className="botao" onClick={alternarConclusao}>
