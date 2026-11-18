@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom'
-
-function formatarData(data) {
-  const [ano, mes, dia] = data.split('-')
-  return `${dia}/${mes}/${ano}`
-}
+import formatarData from '../utils/formatarData'
 
 const rotulos = { alta: 'Alta', media: 'Média', baixa: 'Baixa' }
 
