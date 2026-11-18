@@ -41,7 +41,7 @@ Estudantes e pequenas equipes perdem prazos e tarefas por anotarem em lugares di
 ## Como executar
 Pré-requisitos: Node.js LTS e Git.
 
-    git clone https://github.com/USUARIO/taskflow.git
+    git clone https://github.com/thallyson-ryan/taskflow.git
     cd taskflow
     npm install
     npm run dev
