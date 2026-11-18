@@ -1,0 +1,16 @@
+.filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.filtros input, .filtros select { padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font-size: .95rem; }
+.filtros input { flex: 1; min-width: 200px; }
+.contador { color: #666; font-size: .9rem; }
+.lista { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.cartao { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+.cartao.concluida h3 { text-decoration: line-through; color: #888; }
+.cartao h3 { font-size: 1.05rem; margin-bottom: .25rem; }
+.info { color: #666; font-size: .85rem; margin: 0; }
+.cartao-lado { display: flex; align-items: center; gap: .75rem; }
+.cartao-lado a { color: #2d7be5; text-decoration: none; }
+.selo { padding: .2rem .6rem; border-radius: 12px; font-size: .8rem; color: #fff; }
+.selo.alta { background: #e5533d; }
+.selo.media { background: #f0a500; }
+.selo.baixa { background: #3aa76d; }
+.aviso { background: #fff8e1; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
