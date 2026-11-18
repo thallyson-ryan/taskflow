@@ -1,7 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import useLocalStorage from './hooks/useLocalStorage'
 import Navbar from './components/Navbar'
+import RotaProtegida from './components/RotaProtegida'
 import Inicio from './pages/Inicio'
+import Login from './pages/Login'
 import ListaTarefas from './pages/ListaTarefas'
 import NovaTarefa from './pages/NovaTarefa'
 import DetalheTarefa from './pages/DetalheTarefa'
@@ -17,9 +19,10 @@ export default function App() {
       <main className="container">
         <Routes>
           <Route path="/" element={<Inicio total={tarefas.length} />} />
-          <Route path="/tarefas" element={<ListaTarefas tarefas={tarefas} setTarefas={setTarefas} />} />
-          <Route path="/tarefas/nova" element={<NovaTarefa setTarefas={setTarefas} />} />
-          <Route path="/tarefas/:id" element={<DetalheTarefa tarefas={tarefas} setTarefas={setTarefas} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/tarefas" element={<RotaProtegida><ListaTarefas tarefas={tarefas} setTarefas={setTarefas} /></RotaProtegida>} />
+          <Route path="/tarefas/nova" element={<RotaProtegida><NovaTarefa setTarefas={setTarefas} /></RotaProtegida>} />
+          <Route path="/tarefas/:id" element={<RotaProtegida><DetalheTarefa tarefas={tarefas} setTarefas={setTarefas} /></RotaProtegida>} />
           <Route path="*" element={<NaoEncontrada />} />
         </Routes>
       </main>
