@@ -92,3 +92,15 @@ p { margin-bottom: .75rem; }
   .inicio h1 { font-size: 1.7rem; }
   h1 { font-size: 1.5rem; }
 }
+
+/* ---------- Mini resumo da página inicial ---------- */
+.resumo { display: grid; grid-template-columns: repeat(2, minmax(0, 180px)); gap: 1rem; margin-top: 1.5rem; }
+.resumo-item {
+  display: flex; flex-direction: column;
+  background: rgba(255, 255, 255, .15);
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: var(--raio);
+  padding: 1rem 1.25rem;
+}
+.resumo-numero { font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.resumo-rotulo { font-size: .9rem; color: rgba(255, 255, 255, .85); }

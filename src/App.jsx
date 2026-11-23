@@ -40,8 +40,18 @@ export default function App() {
       <main className="container">
         {/* <Routes> olha a URL atual e mostra apenas a <Route> que combina com ela */}
         <Routes>
-          {/* Página inicial (pública). Se não houver usuário logado, envia null para não mostrar total */}
-          <Route path="/" element={<Inicio total={usuario ? tarefas.length : null} />} />
+          {/* Logado: envia a contagem de pendentes e concluídas. Deslogado: null */}
+          <Route
+            path="/"
+            element={
+              <Inicio
+                resumo={usuario ? {
+                  pendentes: tarefas.filter((t) => !t.concluida).length,
+                  concluidas: tarefas.filter((t) => t.concluida).length,
+                } : null}
+              />
+            }
+          />
 
           {/* Página de login (pública) */}
           <Route path="/login" element={<Login />} />
