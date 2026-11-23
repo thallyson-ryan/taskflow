@@ -1,28 +1,94 @@
 /* =============================================================================
    global.css — ESTILOS USADOS EM TODAS AS PÁGINAS
-   Importado no main.jsx.
+   As cores e medidas ficam em variáveis (:root) para facilitar mudanças.
    ============================================================================= */
 
-/* Reset básico: remove margens padrão do navegador e faz o padding
-   contar dentro da largura dos elementos (box-sizing) */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, sans-serif; background: #f4f6f8; color: #222; }
+:root {
+  --cor-primaria: #4f46e5;
+  --cor-primaria-escura: #4338ca;
+  --cor-primaria-clara: #eef2ff;
+  --cor-fundo: #f5f7fb;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1f2937;
+  --cor-suave: #6b7280;
+  --cor-borda: #e5e7eb;
+  --cor-perigo: #dc2626;
+  --raio: 12px;
+  --sombra: 0 1px 2px rgba(16, 24, 40, .06), 0 1px 3px rgba(16, 24, 40, .1);
+  --sombra-hover: 0 8px 24px rgba(16, 24, 40, .12);
+}
 
-/* ---------- Barra de navegação ---------- */
-.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #2d3e50; color: #fff; }
-.logo { font-weight: 700; font-size: 1.2rem; }
-.navbar nav { display: flex; gap: 1rem; }
-.navbar a { color: #cfd8e3; text-decoration: none; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Barra de navegação (fixa no topo) ---------- */
+.navbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .9rem 2rem;
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+  box-shadow: var(--sombra);
+}
+.logo { font-weight: 800; font-size: 1.3rem; color: var(--cor-primaria); letter-spacing: -.02em; }
+.navbar nav { display: flex; align-items: center; gap: .35rem; }
+.navbar a {
+  color: var(--cor-suave); text-decoration: none; font-weight: 500;
+  padding: .45rem .8rem; border-radius: 8px;
+  transition: background .2s, color .2s;
+}
+.navbar a:hover { background: var(--cor-primaria-clara); color: var(--cor-primaria); }
 /* .active é adicionada automaticamente pelo NavLink na rota atual */
-.navbar a.active { color: #fff; border-bottom: 2px solid #4fc3f7; }
+.navbar a.active { background: var(--cor-primaria-clara); color: var(--cor-primaria); font-weight: 600; }
 
 /* ---------- Layout ---------- */
-/* Centraliza o conteúdo com largura máxima de 900px */
-.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-h1 { margin-bottom: 1rem; }
+.container { max-width: 960px; margin: 2.5rem auto; padding: 0 1.25rem; }
+h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 1.25rem; }
 p { margin-bottom: .75rem; }
 
 /* ---------- Botões ---------- */
-.acoes { display: flex; gap: .75rem; margin-top: 1rem; }
-.botao { display: inline-block; padding: .6rem 1.2rem; background: #2d7be5; color: #fff; border: none; border-radius: 6px; text-decoration: none; cursor: pointer; }
-.botao.secundario { background: #6c7a89; } /* botão cinza (ações secundárias) */
+.acoes { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  padding: .65rem 1.25rem;
+  background: var(--cor-primaria); color: #fff;
+  border: 1px solid transparent; border-radius: 10px;
+  font: inherit; font-weight: 600; font-size: .95rem;
+  text-decoration: none; cursor: pointer;
+  transition: background .2s, transform .1s, box-shadow .2s;
+}
+.botao:hover { background: var(--cor-primaria-escura); box-shadow: var(--sombra); }
+.botao:active { transform: scale(.98); }
+.botao:focus-visible { outline: 3px solid #c7d2fe; outline-offset: 2px; }
+.botao.secundario { background: var(--cor-superficie); color: var(--cor-texto); border-color: var(--cor-borda); }
+.botao.secundario:hover { background: #f9fafb; }
+
+/* ---------- Página inicial (banner) ---------- */
+.inicio {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  padding: 3rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: var(--sombra-hover);
+}
+.inicio h1 { font-size: 2.2rem; line-height: 1.2; }
+.inicio p { color: rgba(255, 255, 255, .9); max-width: 600px; font-size: 1.05rem; }
+.inicio .botao { background: #fff; color: var(--cor-primaria); }
+.inicio .botao:hover { background: var(--cor-primaria-clara); }
+.inicio .botao.secundario { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .5); }
+.inicio .botao.secundario:hover { background: rgba(255, 255, 255, .12); }
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  .navbar { flex-direction: column; gap: .6rem; padding: .9rem 1rem; }
+  .navbar nav { flex-wrap: wrap; justify-content: center; }
+  .inicio { padding: 2rem 1.5rem; }
+  .inicio h1 { font-size: 1.7rem; }
+  h1 { font-size: 1.5rem; }
+}

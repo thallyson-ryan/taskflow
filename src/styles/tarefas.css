@@ -1,41 +1,95 @@
 /* =============================================================================
    tarefas.css — ESTILOS DA LISTA DE TAREFAS
-   Importado na ListaTarefas.jsx.
    ============================================================================= */
 
 /* ---------- Filtros ---------- */
-/* flex-wrap: os campos quebram de linha em telas pequenas */
-.filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
-.filtros input, .filtros select { padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font-size: .95rem; }
-.filtros input { flex: 1; min-width: 200px; } /* a busca ocupa o espaço que sobrar */
-.contador { color: #666; font-size: .9rem; }
+.filtros {
+  display: flex; flex-wrap: wrap; gap: .75rem;
+  background: var(--cor-superficie);
+  padding: 1rem; margin-bottom: 1rem;
+  border: 1px solid var(--cor-borda); border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.filtros input, .filtros select {
+  padding: .6rem .8rem;
+  border: 1px solid var(--cor-borda); border-radius: 8px;
+  background: #fff; font: inherit; font-size: .95rem; color: var(--cor-texto);
+  transition: border-color .2s, box-shadow .2s;
+}
+.filtros input:focus, .filtros select:focus {
+  outline: none; border-color: var(--cor-primaria); box-shadow: 0 0 0 3px #e0e7ff;
+}
+.filtros input { flex: 1; min-width: 200px; }
+.contador { color: var(--cor-suave); font-size: .875rem; }
 
 /* ---------- Lista e cartões ---------- */
-.lista { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
-.cartao { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
-/* Tarefa concluída: título riscado e cinza */
-.cartao.concluida h3 { text-decoration: line-through; color: #888; }
-.cartao h3 { font-size: 1.05rem; margin-bottom: .25rem; }
-.info { color: #666; font-size: .85rem; margin: 0; }
-.cartao-lado { display: flex; align-items: center; gap: .75rem; }
-.cartao-lado a { color: #2d7be5; text-decoration: none; }
+.lista { list-style: none; display: grid; gap: .75rem; }
+.cartao {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  background: var(--cor-superficie);
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--cor-borda); border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  transition: transform .15s, box-shadow .2s;
+}
+.cartao:hover { transform: translateY(-2px); box-shadow: var(--sombra-hover); }
+.cartao h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: .2rem; }
+.cartao.concluida { opacity: .65; }
+.cartao.concluida h3 { text-decoration: line-through; }
+.info { color: var(--cor-suave); font-size: .85rem; margin: 0; }
+.cartao-lado { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+.cartao-lado a {
+  color: var(--cor-primaria); background: var(--cor-primaria-clara);
+  font-weight: 600; font-size: .875rem; text-decoration: none;
+  padding: .4rem .8rem; border-radius: 8px;
+  transition: background .2s;
+}
+.cartao-lado a:hover { background: #e0e7ff; }
 
-/* ---------- Selos de prioridade (uma cor para cada) ---------- */
-.selo { padding: .2rem .6rem; border-radius: 12px; font-size: .8rem; color: #fff; }
-.selo.alta { background: #e5533d; }  /* vermelho */
-.selo.media { background: #f0a500; } /* amarelo */
-.selo.baixa { background: #3aa76d; } /* verde */
+/* ---------- Selos de prioridade ---------- */
+.selo {
+  padding: .2rem .65rem; border-radius: 999px;
+  font-size: .75rem; font-weight: 700; letter-spacing: .02em;
+}
+.selo.alta { background: #fee2e2; color: #b91c1c; }
+.selo.media { background: #fef3c7; color: #b45309; }
+.selo.baixa { background: #dcfce7; color: #15803d; }
 
 /* ---------- Avisos ---------- */
-.aviso { background: #fff8e1; padding: 1rem; border-radius: 8px; margin: 1rem 0; } /* caixa amarela */
+.aviso {
+  background: #fffbeb; color: #92400e;
+  border: 1px solid #fde68a; border-radius: var(--raio);
+  padding: 1rem 1.25rem; margin: 1rem 0;
+}
 
-/* ---------- Estados da requisição (AV2) ---------- */
-/* Caixa do "Carregando tarefas..." */
-.carregando { display: flex; align-items: center; gap: .75rem; padding: 1.5rem; background: #fff; border-radius: 8px; }
-/* Spinner: círculo com a borda de cima azul girando sem parar */
-.spinner { width: 20px; height: 20px; border: 3px solid #ccc; border-top-color: #2d7be5; border-radius: 50%; animation: girar 1s linear infinite; }
+/* ---------- Estados da requisição ---------- */
+.carregando {
+  display: flex; align-items: center; gap: .75rem;
+  padding: 1.5rem;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda); border-radius: var(--raio);
+  color: var(--cor-suave);
+}
+.spinner {
+  width: 22px; height: 22px;
+  border: 3px solid var(--cor-primaria-clara); border-top-color: var(--cor-primaria);
+  border-radius: 50%;
+  animation: girar .8s linear infinite;
+}
 @keyframes girar { to { transform: rotate(360deg); } }
-/* Caixa vermelha de erro */
-.erro-lista { background: #fdecea; color: #b3261e; padding: 1rem; border-radius: 8px; }
-/* Barra azul que informa a origem dos dados (API, navegador ou contingência) */
-.barra-origem { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; background: #eef4fd; padding: .75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: .9rem; }
+.erro-lista {
+  background: #fef2f2; color: #991b1b;
+  border: 1px solid #fecaca; border-radius: var(--raio);
+  padding: 1.25rem;
+}
+.barra-origem {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+  background: var(--cor-primaria-clara); color: #3730a3;
+  border: 1px solid #c7d2fe; border-radius: var(--raio);
+  padding: .75rem 1rem; margin-bottom: 1rem; font-size: .9rem;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  .cartao { flex-direction: column; align-items: flex-start; }
+}

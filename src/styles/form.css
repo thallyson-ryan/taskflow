@@ -1,35 +1,83 @@
 /* =============================================================================
    form.css — ESTILOS DE FORMULÁRIOS, DETALHE E LOGIN
-   Importado em NovaTarefa, DetalheTarefa e Login.
    ============================================================================= */
 
 /* ---------- Formulário ---------- */
-.form { display: flex; flex-direction: column; gap: 1rem; background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
-.campo label { display: block; font-weight: 600; margin-bottom: .3rem; }
-.campo input, .campo select, .campo textarea { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
-/* Campo com erro de validação: borda vermelha */
-.campo.invalido input, .campo.invalido select { border-color: #e5533d; }
-/* Mensagem de erro embaixo do campo */
-.erro { color: #e5533d; font-size: .85rem; margin: .25rem 0 0; }
+.form {
+  display: flex; flex-direction: column; gap: 1.1rem;
+  background: var(--cor-superficie);
+  padding: 1.75rem;
+  border: 1px solid var(--cor-borda); border-radius: 16px;
+  box-shadow: var(--sombra);
+}
+.campo label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: .35rem; }
+.campo input, .campo select, .campo textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border: 1px solid var(--cor-borda); border-radius: 8px;
+  background: #fff; font: inherit; color: var(--cor-texto);
+  transition: border-color .2s, box-shadow .2s;
+}
+.campo textarea { resize: vertical; }
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  outline: none; border-color: var(--cor-primaria); box-shadow: 0 0 0 3px #e0e7ff;
+}
+/* Campo com erro de validação */
+.campo.invalido input, .campo.invalido select { border-color: var(--cor-perigo); }
+.campo.invalido input:focus, .campo.invalido select:focus { box-shadow: 0 0 0 3px #fee2e2; }
+.erro { color: var(--cor-perigo); font-size: .82rem; margin: .3rem 0 0; }
 
 /* ---------- Mensagens e detalhe ---------- */
-/* Caixa verde de sucesso ("Tarefa cadastrada", "Alterações salvas"...) */
-.sucesso { background: #e6f4ea; color: #1e6b3a; padding: .75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
-.detalhe { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); margin-bottom: 1rem; }
-.botao.perigo { background: #e5533d; } /* botão vermelho (excluir) */
-.confirmacao { margin-top: 1rem; padding: 1rem; background: #fdecea; border-radius: 6px; }
+.sucesso {
+  background: #f0fdf4; color: #166534;
+  border: 1px solid #bbf7d0; border-radius: var(--raio);
+  padding: .85rem 1.1rem; margin-bottom: 1rem; font-weight: 500;
+}
+.detalhe {
+  background: var(--cor-superficie);
+  padding: 2rem;
+  border: 1px solid var(--cor-borda); border-radius: 16px;
+  box-shadow: var(--sombra);
+  margin-bottom: 1.25rem;
+}
+.detalhe p { color: var(--cor-suave); }
+.botao.perigo { background: var(--cor-perigo); }
+.botao.perigo:hover { background: #b91c1c; }
+.confirmacao {
+  margin-top: 1.25rem; padding: 1.1rem;
+  background: #fef2f2; color: #991b1b;
+  border: 1px solid #fecaca; border-radius: var(--raio);
+}
+section > p > a { color: var(--cor-primaria); font-weight: 600; text-decoration: none; }
+section > p > a:hover { text-decoration: underline; }
 
-/* ---------- Login (AV2) ---------- */
-.login { max-width: 420px; margin: 0 auto; } /* formulário estreito e centralizado */
-/* Caixa vermelha de erro do login (senha errada, sem internet) */
-.erro-caixa { background: #fdecea; color: #b3261e; padding: .75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
-/* Caixa azul com as credenciais de demonstração */
-.demo { margin-top: 1rem; padding: 1rem; background: #eef4fd; border-radius: 8px; font-size: .9rem; }
+/* ---------- Login ---------- */
+.login { max-width: 420px; margin: 1rem auto; }
+.login h1 { text-align: center; }
+.erro-caixa {
+  background: #fef2f2; color: #991b1b;
+  border: 1px solid #fecaca; border-radius: var(--raio);
+  padding: .85rem 1.1rem; margin-bottom: 1rem;
+}
+.demo {
+  margin-top: 1.25rem; padding: 1.1rem;
+  background: var(--cor-primaria-clara); color: #3730a3;
+  border: 1px dashed #a5b4fc; border-radius: var(--raio);
+  font-size: .9rem;
+}
+.demo p { margin-bottom: .4rem; }
 
 /* ---------- Usuário na Navbar ---------- */
-.usuario { color: #fff; font-size: .9rem; }
-/* Botão "Sair" com aparência de link */
-.link-sair { background: none; border: none; color: #cfd8e3; cursor: pointer; font: inherit; }
-.link-sair:hover { color: #fff; }
-/* Botão desabilitado (ex.: "Entrando..." enquanto aguarda a API) */
+.usuario {
+  color: var(--cor-texto); font-size: .9rem; font-weight: 500;
+  padding: 0 .5rem 0 .9rem; margin-left: .35rem;
+  border-left: 1px solid var(--cor-borda);
+}
+.link-sair {
+  background: none; border: none; cursor: pointer;
+  color: var(--cor-perigo); font: inherit; font-weight: 600;
+  padding: .45rem .8rem; border-radius: 8px;
+  transition: background .2s;
+}
+.link-sair:hover { background: #fef2f2; }
 .botao:disabled { opacity: .6; cursor: wait; }
